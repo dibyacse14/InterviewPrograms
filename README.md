@@ -1,2 +1,2 @@
 # InterviewPrograms
-InterviewPrograms coded by refer if you want but coorect me if i m wrong.
+InterviewPrograms coded by me refer if you want but correct me if i m wrong.
