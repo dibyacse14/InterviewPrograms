@@ -1,19 +1,14 @@
 package com.dibya;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.io.*;
+import java.util.*;
 
 public class WordCount {
 
-    public static void main(String[] args) throws FileNotFoundException {
-        File file = new File("/abc.txt");
-        FileInputStream fis = new FileInputStream(file);
-
-        String str = "Kumar is a good guy, Kumar is working in a store as shop keeper. Kumar was previously working in a shop named detail store";
+    public static void main(String[] args) throws IOException {
+        FileReader fileReader = new FileReader("/Users/dibya/Downloads/InterviewPrograms/src/main/java/com/dibya/programs/abc.txt");
+        BufferedReader br = new BufferedReader(fileReader);
+        String str = br.readLine();
 
         List<String> arr = Arrays.asList(str.split(" "));
 
@@ -27,8 +22,27 @@ public class WordCount {
             }
         }
 
-//        count.
-//        System.out.println(count);
+        List<Map.Entry<String, Integer>> keyList =
+                new LinkedList<>(count.entrySet());
+        System.out.println("Before sort : "+count);
 
+        Collections.sort(keyList, new Comparator<Map.Entry<String, Integer>>() {
+            @Override
+            public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
+                return o1.getValue()==o2.getValue()?-(o1.getKey()).compareTo(o2.getKey()):-(o1.getValue()).compareTo(o2.getValue());
+            }
+        });
+// Sort the list using lambda expression
+        Collections.sort(
+                keyList,
+                (o1,
+                 o2) -> o1.getValue()==o2.getValue()?-(o1.getKey()).compareTo(o2.getKey()):-(o1.getValue()).compareTo(o2.getValue()));
+        HashMap<String,Integer> sortedMap = new LinkedHashMap<>();
+
+        for(Map.Entry<String,Integer> me:keyList){
+            sortedMap.put(me.getKey(),me.getValue());
+        }
+
+        System.out.println("After sort : "+sortedMap);
     }
 }
