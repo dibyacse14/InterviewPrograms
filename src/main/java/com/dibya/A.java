@@ -4,12 +4,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 class A {
-void a() {
+int as() {
 try{
-int a = 10/0;
+return 12;
 } catch (ArithmeticException e) {
 }
+finally {
+    return 20;
 }
+}
+
 }
 
 class B extends A {
@@ -23,7 +27,7 @@ System.out.println("B");
     public static void main(String[] args) {
         A a = new B();
 //        System.out.println("a: "+a.a());
-
+        System.out.println(a.as());
         Map<String, String> map = new HashMap<>();
 
         map.put("hi", "Test");
