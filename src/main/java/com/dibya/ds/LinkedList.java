@@ -2,7 +2,7 @@ package com.dibya.ds;// Java program to get intersection point of two linked lis
 
 class LinkedList {
 
-	static Node head1, head2;
+	static Node head1, head2,head3;
 
 	static class Node {
 
@@ -90,7 +90,64 @@ class LinkedList {
 		list.head2.next = new Node(15);
 		list.head2.next.next = new Node(30);
 
-		System.out.println("The node of intersection is " + list.getNode());
+//		System.out.println("The node of intersection is " + list.getNode());
+
+		Node rev = list.reverseList(head2);
+		while (rev !=null){
+			System.out.println(rev.data);
+			 rev =rev.next;
+		}
+
+		list.head3 = new Node(3);
+		list.head3.next = new Node(6);
+		list.head3.next.next = new Node(9);
+		list.head3.next.next.next = new Node(6);
+		list.head3.next.next.next.next = new Node(3);
+		boolean isPalindrome = list.isPalindrome(head3);
+		if(isPalindrome)
+			System.out.println("List is palindrome");
+	}
+
+	public boolean isPalindrome(Node head){
+		if(head ==null || head.next ==null){
+			return  true;
+		}
+		Node slow =head;
+		Node fast = head;
+
+		//Find middle element of linked list
+		while (fast.next != null && fast.next.next != null){
+			slow = slow.next;
+			fast = fast.next.next;
+		}
+		//Reverse the right half
+		slow.next = reverseList(slow.next);
+
+		//move slow to right half
+		slow = slow.next;
+
+		//compare both halfs
+		while (slow != null){
+			if(head.data != slow.data){
+				return false;
+			}
+			head = head.next;
+			slow = slow.next;
+		}
+
+		return true;
+	}
+
+	private Node reverseList(Node head) {
+		Node prev = null;
+		Node next = null;
+		while (head!=null){
+			next = head.next;
+			head.next = prev;
+			prev = head;
+			head=next;
+		}
+		return prev;
 	}
 }
 
